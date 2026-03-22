@@ -34,13 +34,6 @@ button {
     font-size: 20px;
     display: none;
 }
-
-#downloadLink {
-    display: none;
-    margin-top: 20px;
-    font-size: 18px;
-    color: #00ffcc;
-}
 </style>
 </head>
 
@@ -48,13 +41,11 @@ button {
 
 <div class="container">
     <h1>🚀 BoostMe</h1>
-    <p>تحميل تطبيق تجريبي</p>
+    <p>تحميل تجريبي</p>
 
     <button onclick="startDownload()">تحميل الآن</button>
 
     <div id="countdown">جاري التحضير... 5</div>
-
-    <a id="downloadLink" download="BoostMe.txt">اضغط هنا للتحميل</a>
 </div>
 
 <script>
@@ -68,15 +59,13 @@ function startDownload() {
 
         if (time === 0) {
             clearInterval(interval);
-            document.getElementById("countdown").innerText = "✅ جاهز للتحميل";
+            document.getElementById("countdown").innerText = "✅ تم فتح الملف";
 
-            let fileContent = "هذا ملف تجريبي من موقع BoostMe";
-            let blob = new Blob([fileContent], { type: "text/plain" });
+            let content = "هذا ملف من BoostMe";
+            let blob = new Blob([content], { type: "text/plain" });
             let url = URL.createObjectURL(blob);
 
-            let link = document.getElementById("downloadLink");
-            link.href = url;
-            link.style.display = "block";
+            window.open(url); // يفتح الملف مباشرة (يشتغل على الآيفون)
         }
     }, 1000);
 }
