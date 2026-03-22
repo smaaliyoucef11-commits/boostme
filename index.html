@@ -2,56 +2,60 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>BoostMe</title>
+<title>BoostMe - تحميل سريع</title>
+
 <style>
 body {
     font-family: Arial;
-    text-align: center;
-    background: #111;
+    background: linear-gradient(135deg, #0f2027, #2c5364);
     color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+p {
+    opacity: 0.8;
 }
 
 button {
-    padding: 15px;
-    font-size: 18px;
     margin-top: 20px;
+    padding: 15px;
+    width: 100%;
+    font-size: 18px;
     background: #00c3ff;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0099cc;
 }
 </style>
+
 </head>
 
 <body>
 
-<h1>🔥 BoostMe</h1>
+<div class="container">
+    <h1>🚀 BoostMe</h1>
+    <p>احصل على أفضل العروض والتحميلات بسرعة</p>
 
-<p id="idea">اضغط الزر للحصول على فكرة</p>
-<p id="tags"></p>
-
-<button onclick="generate()">اعطني فكرة</button>
+    <button onclick="goLink()">تحميل الآن</button>
+</div>
 
 <script>
-let ideas = [
-"صور يومك بطريقة مميزة",
-"اعمل فيديو قبل/بعد",
-"شارك نصيحة سريعة",
-"جرب ترند جديد"
-];
-
-let tags = [
-"#viral #fyp #explore",
-"#trending #fun #video",
-"#instagood #reels",
-"#tiktoktrend #explorepage"
-];
-
-function generate() {
-    let idea = ideas[Math.floor(Math.random() * ideas.length)];
-    let tag = tags[Math.floor(Math.random() * tags.length)];
-    
-    document.getElementById("idea").innerText = idea;
-    document.getElementById("tags").innerText = tag;
+function goLink() {
+    window.location.href = "https://example.com";
 }
 </script>
 
