@@ -29,10 +29,6 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background: #0099cc;
-}
-
 #countdown {
     margin-top: 20px;
     font-size: 20px;
@@ -52,18 +48,14 @@ button:hover {
 
 <div class="container">
     <h1>🚀 BoostMe</h1>
-    <p>أفضل العروض والتحميلات بسرعة فائقة</p>
+    <p>تحميل تطبيق تجريبي</p>
 
     <button onclick="startDownload()">تحميل الآن</button>
 
     <div id="countdown">جاري التحضير... 5</div>
 
-    <a id="downloadLink" href="#">اضغط هنا للتحميل</a>
+    <a id="downloadLink" download="BoostMe.txt">اضغط هنا للتحميل</a>
 </div>
-
-<footer style="margin-top:50px; opacity:0.6;">
-    © 2026 BoostMe
-</footer>
 
 <script>
 function startDownload() {
@@ -78,11 +70,13 @@ function startDownload() {
             clearInterval(interval);
             document.getElementById("countdown").innerText = "✅ جاهز للتحميل";
 
-            let link = document.getElementById("downloadLink");
-            link.style.display = "block";
+            let fileContent = "هذا ملف تجريبي من موقع BoostMe";
+            let blob = new Blob([fileContent], { type: "text/plain" });
+            let url = URL.createObjectURL(blob);
 
-            // 🔥 ضع رابطك هنا مستقبلاً
-            link.href = "#";
+            let link = document.getElementById("downloadLink");
+            link.href = url;
+            link.style.display = "block";
         }
     }, 1000);
 }
