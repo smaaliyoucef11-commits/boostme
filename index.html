@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>BoostMe</title>
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #111;
+    color: white;
+}
+
+button {
+    padding: 15px;
+    font-size: 18px;
+    margin-top: 20px;
+    background: #00c3ff;
+    border: none;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔥 BoostMe</h1>
+
+<p id="idea">اضغط الزر للحصول على فكرة</p>
+<p id="tags"></p>
+
+<button onclick="generate()">اعطني فكرة</button>
+
+<script>
+let ideas = [
+"صور يومك بطريقة مميزة",
+"اعمل فيديو قبل/بعد",
+"شارك نصيحة سريعة",
+"جرب ترند جديد"
+];
+
+let tags = [
+"#viral #fyp #explore",
+"#trending #fun #video",
+"#instagood #reels",
+"#tiktoktrend #explorepage"
+];
+
+function generate() {
+    let idea = ideas[Math.floor(Math.random() * ideas.length)];
+    let tag = tags[Math.floor(Math.random() * tags.length)];
+    
+    document.getElementById("idea").innerText = idea;
+    document.getElementById("tags").innerText = tag;
+}
+</script>
+
+</body>
+</html>
