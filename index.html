@@ -1,74 +1,153 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BoostMe</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚽ Live Matches</title>
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: white;
-    text-align: center;
-}
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(135deg, #020617, #0f172a);
+      color: white;
+      margin: 0;
+      text-align: center;
+    }
 
-.container {
-    padding: 60px 20px;
-}
+    header {
+      padding: 20px;
+      font-size: 26px;
+      background: #020617;
+      border-bottom: 1px solid #1e293b;
+    }
 
-button {
-    margin-top: 20px;
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    background: #00c3ff;
-    color: white;
-    cursor: pointer;
-}
+    .container {
+      padding: 20px;
+    }
 
-#countdown {
-    margin-top: 20px;
-    font-size: 20px;
-    display: none;
-}
-</style>
+    .match {
+      background: #1e293b;
+      margin: 15px auto;
+      padding: 15px;
+      border-radius: 15px;
+      max-width: 420px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      transition: 0.3s;
+    }
+
+    .match:hover {
+      transform: scale(1.03);
+    }
+
+    .teams {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+    }
+
+    .team {
+      width: 40%;
+    }
+
+    .team img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .score {
+      font-size: 28px;
+      margin: 10px 0;
+      color: #22c55e;
+    }
+
+    .status {
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    .live {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>🚀 BoostMe</h1>
-    <p>تحميل تجريبي</p>
+<header>
+  ⚽ بث مباشر للمباريات
+</header>
 
-    <button onclick="startDownload()">تحميل الآن</button>
-
-    <div id="countdown">جاري التحضير... 5</div>
-</div>
+<div class="container" id="matches"></div>
 
 <script>
-function startDownload() {
-    let time = 5;
-    document.getElementById("countdown").style.display = "block";
+const matches = [
+  {
+    home: "Real Madrid",
+    away: "Barcelona",
+    homeLogo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
+    awayLogo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg",
+    score: "2 - 1",
+    status: "LIVE 🔴"
+  },
+  {
+    home: "Manchester City",
+    away: "Chelsea",
+    homeLogo: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
+    awayLogo: "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg",
+    score: "1 - 0",
+    status: "الشوط الثاني"
+  },
+  {
+    home: "PSG",
+    away: "Bayern Munich",
+    homeLogo: "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg",
+    awayLogo: "https://upload.wikimedia.org/wikipedia/en/1/1f/FC_Bayern_München_logo_%282017%29.svg",
+    score: "0 - 0",
+    status: "قريباً"
+  }
+];
 
-    let interval = setInterval(() => {
-        time--;
-        document.getElementById("countdown").innerText = "جاري التحضير... " + time;
+function showMatches() {
+  let content = "";
 
-        if (time === 0) {
-            clearInterval(interval);
-            document.getElementById("countdown").innerText = "✅ تم فتح الملف";
+  matches.forEach(match => {
+    content += `
+      <div class="match">
+        <div class="teams">
+          <div class="team">
+            <img src="${match.homeLogo}">
+            <div>${match.home}</div>
+          </div>
 
-            let content = "هذا ملف من BoostMe";
-            let blob = new Blob([content], { type: "text/plain" });
-            let url = URL.createObjectURL(blob);
+          <div>VS</div>
 
-            window.open(url); // يفتح الملف مباشرة (يشتغل على الآيفون)
-        }
-    }, 1000);
+          <div class="team">
+            <img src="${match.awayLogo}">
+            <div>${match.away}</div>
+          </div>
+        </div>
+
+        <div class="score">${match.score}</div>
+
+        <div class="status ${match.status.includes("LIVE") ? "live" : ""}">
+          ${match.status}
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById("matches").innerHTML = content;
 }
+
+// تحديث وهمي كل 10 ثواني
+setInterval(() => {
+  matches[0].score = Math.random() > 0.5 ? "3 - 1" : "2 - 2";
+  showMatches();
+}, 10000);
+
+showMatches();
 </script>
 
 </body>
